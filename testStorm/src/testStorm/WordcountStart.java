@@ -2,8 +2,6 @@ package testStorm;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
-import backtype.storm.generated.AlreadyAliveException;
-import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
 
@@ -19,18 +17,17 @@ public class WordcountStart {
 		conf.setDebug(true);
 		conf.setNumWorkers(20);
 
-		 LocalCluster cluster = new LocalCluster();
-		 cluster.submitTopology("wordcount-demo", conf, builder.createTopology());
+		LocalCluster cluster = new LocalCluster();
+		cluster.submitTopology("wordcount-demo", conf, builder.createTopology());
 		try {
 			cluster.submitTopology("wordcount-demo", conf, builder.createTopology());
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		 cluster.killTopology("wordcount-demo");
-		 cluster.shutdown();
+		cluster.killTopology("wordcount-demo");
+		cluster.shutdown();
 
 	}
 

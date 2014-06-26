@@ -21,6 +21,11 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
 
+/**
+ * Hbase Demo
+ * @author james
+ *
+ */
 public class HBaseTest {
 
 	private static Configuration conf = null;

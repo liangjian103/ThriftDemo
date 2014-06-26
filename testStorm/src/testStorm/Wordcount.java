@@ -11,7 +11,7 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 
-public class wordcount implements IRichBolt {
+public class Wordcount implements IRichBolt {
 	OutputCollector _collector;
 	public Map<String, Integer> countMap = new HashMap<String, Integer>();
 

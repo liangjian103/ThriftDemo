@@ -10,7 +10,7 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
-public class splitSentence implements IRichBolt {
+public class SplitSentence implements IRichBolt {
 
 	OutputCollector _collector;
 

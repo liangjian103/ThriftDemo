@@ -7,13 +7,13 @@ import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
 
-public class wordcountStart {
+public class WordcountStart {
 
 	public static void main(String[] args) {
 		TopologyBuilder builder = new TopologyBuilder();
-		builder.setSpout("1", new wordcountspout());
-		builder.setBolt("2", new splitSentence()).fieldsGrouping("1", new Fields("word"));
-		builder.setBolt("3", new wordcount()).fieldsGrouping("2", new Fields("word"));
+		builder.setSpout("1", new Wordcountspout());
+		builder.setBolt("2", new SplitSentence()).fieldsGrouping("1", new Fields("word"));
+		builder.setBolt("3", new Wordcount()).fieldsGrouping("2", new Fields("word"));
 
 		Config conf = new Config();
 		conf.setDebug(true);

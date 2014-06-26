@@ -10,7 +10,7 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 
-public class wordcountspout implements IRichSpout {
+public class Wordcountspout implements IRichSpout {
 	SpoutOutputCollector _collector;
 	@Override
 	public void open(Map conf, TopologyContext context,

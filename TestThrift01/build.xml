@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TestThrift01" default="allwar" basedir=".">
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="war.dir" value="${basedir}/war" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="develop-war" value="${war.dir}/develop-war/TestThrift01" />
+	<property name="develop_conf.dir" value="${basedir}/develop_conf" />
+	
+	<path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${war.dir}" />
+		<delete dir="${build.dir}" />
+		<delete dir="${lib.dir}">
+			<include name="TestThrift01.jar" />
+		</delete>
+	</target>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${war.dir}" />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${develop-war}" />
+	</target>
+	
+	<target name="compile" depends="init">
+		<echo>=== COMPILE ===</echo>
+		<echo>Compiling ${src.dir} files ...</echo>
+		<javac debug="on" srcdir="${src.dir}" destdir="${build.classes.dir}" includes="**/*">
+			<compilerarg line="-encoding UTF-8 " />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<echo>=== PACKAGE ===</echo>
+		<!-- copy the config files -->
+		<copy todir="${build.classes.dir}">
+			<fileset dir="${src.dir}">
+				<exclude name="**/*.java" />
+				<exclude name="log4j.properties" />
+				<exclude name="jdbc.properties" />
+				<exclude name="system.properties" />
+			</fileset>
+		</copy>
+		<jar jarfile="${lib.dir}/TestThrift01.jar" basedir="${build.classes.dir}" />
+	</target>
+	
+	<target name="develop-war">
+		<copy todir="${develop-war}">
+			<fileset dir="${lib.dir}" />
+		</copy>
+		<copy todir="${develop-war}">
+			<fileset dir="${develop_conf.dir}">
+			</fileset>
+		</copy>
+		<zip destfile="${war.dir}/develop-war/TestThrift01.zip" basedir="${war.dir}/develop-war" />
+	</target>
+	
+	
+	<target name="allwar">
+		<antcall target="jar" />
+		<antcall target="develop-war" />
+	</target>
+</project>
